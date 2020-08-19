@@ -26,7 +26,7 @@ func main() {
 	//Queue is declared here as well because it ensures the queue exists before consuming it.
 	//THe producer may have not declared it at the time of connecting
 	q, err := ch.QueueDeclare(
-		"hello", //Name
+		"Hello", //Name
 		false,   //durable
 		false,   //Auto delete when used
 		false,   //exclusive
