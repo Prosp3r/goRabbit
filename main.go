@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/streadway/amqp"
@@ -59,5 +60,17 @@ func main() {
 	}
 
 	//CONSUME MESSAGES EXAMPLE
+	//consume data in the queue names test using channel created earlier
+	msgs, err := channel.Consume("test", "", false, false, false, false, nil)
+	if err != nil {
+		panic("Could not consum queue: " + err.Error())
+	}
+
+	for msg := range msgs {
+		fmt.Println("Message received: " + string(msg.Body))
+		msg.Ack(false)
+	}
+
+	defer connection.Close()
 
 }
